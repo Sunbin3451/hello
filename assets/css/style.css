@@ -1,0 +1,414 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: #111115;
+    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    position: relative;
+    padding: 15px;
+    transition: background 1s ease;
+}
+
+body.party-mode {
+    background-color: #e5c5dd;
+    background-image:
+        radial-gradient(at 0% 0%, #a5c7eb 0px, transparent 50%),
+        radial-gradient(at 100% 0%, #f6b5be 0px, transparent 55%),
+        radial-gradient(at 0% 100%, #b8dbe2 0px, transparent 50%),
+        radial-gradient(at 100% 100%, #fad0c4 0px, transparent 50%),
+        radial-gradient(at 50% 50%, #e0c7e2 0px, transparent 65%);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Hiệu ứng bóng bay bay lơ lửng */
+.balloons-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.balloon {
+    position: absolute;
+    bottom: -150px;
+    width: 35px;
+    height: 45px;
+    background-color: var(--color);
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    animation: flyUp 8s infinite linear;
+    opacity: 0.7;
+}
+
+.balloon::after {
+    content: "";
+    position: absolute;
+    bottom: -7px;
+    left: 16px;
+    width: 1.5px;
+    height: 12px;
+    background-color: #888;
+}
+
+@keyframes flyUp {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+    }
+
+    30% {
+        transform: translateY(-35vh) translateX(10px);
+    }
+
+    70% {
+        transform: translateY(-75vh) translateX(-10px);
+    }
+
+    100% {
+        transform: translateY(-115vh) translateX(5px);
+        opacity: 0.5;
+    }
+}
+
+/* Phần hộp quà */
+.gift-section {
+    text-align: center;
+    z-index: 10;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.gift-section:active {
+    transform: scale(0.98);
+}
+
+.instruction-text {
+    color: #e2e8f0;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    margin-bottom: 50px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    animation: pulse 1.5s infinite;
+    line-height: 1.4;
+    padding: 0 10px;
+    user-select: none;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+/* Thiết kế Hộp Quà 3D/CSS */
+.gift-box {
+    position: relative;
+    width: 160px;
+    height: 140px;
+    margin: 0 auto;
+}
+
+.gift-body {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 115px;
+    background: linear-gradient(135deg, #ff4d4d, #cc0000);
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.gift-lid {
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 180px;
+    height: 30px;
+    background: linear-gradient(135deg, #ff6666, #e60000);
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.5s ease, top 0.5s ease;
+}
+
+/* Dải ruy băng trang trí */
+.ribbon-vertical {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 26px;
+    background: linear-gradient(135deg, #ffeb3b, #fbc02d);
+}
+
+.ribbon-horizontal {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 22px;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #ffeb3b, #fbc02d);
+}
+
+.bow {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 45px;
+    height: 26px;
+    background-color: #fbc02d;
+    border-radius: 50%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.bow::before,
+.bow::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    width: 22px;
+    height: 22px;
+    border: 4px solid #fbc02d;
+    border-radius: 50%;
+}
+
+.bow::before {
+    left: -12px;
+}
+
+.bow::after {
+    right: -12px;
+}
+
+/* Hiệu ứng mở nắp hộp */
+.gift-box.open .gift-lid {
+    transform: translateY(-60px) rotate(-15deg);
+    opacity: 0.8;
+}
+
+/* Giao diện Thiệp Chúc Mừng */
+.card-section {
+    z-index: 10;
+    animation: fadeIn 0.8s ease forwards;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.birthday-card {
+    background: #ffffff;
+    padding: 25px 20px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 100%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.card-title {
+    color: #ff4d4d;
+    font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+    margin-bottom: 15px;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+}
+
+.photo-frame {
+    width: 100%;
+    height: 220px;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 3px solid #fbcfe8;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.photo-frame img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+    transform: scale(1.6) translate(-5px, 12px);
+    transform-origin: center center;
+}
+
+.message-content {
+    color: #444;
+    font-size: clamp(0.95rem, 3vw, 1.05rem);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.message-content p {
+    margin-bottom: 8px;
+}
+
+.replay-btn {
+    background: #5BA4FC;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    font-size: 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-weight: 600;
+    user-select: none;
+}
+
+.replay-btn:active {
+    opacity: 0.8;
+}
+
+/* Màn hình 3: Bánh kem */
+/* Màn hình 3: Bánh kem độc lập giữa màn hình */
+.cake-section {
+    text-align: center;
+    z-index: 10;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    animation: fadeIn 0.8s ease forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dòng chữ Happy Birthday trên đỉnh */
+.cake-main-title {
+    color: #ffffff;
+    font-size: clamp(1.8rem, 6vw, 2.6rem);
+    font-weight: 800;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 235, 59, 0.6);
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+    animation: pulse 1.5s infinite;
+}
+
+/* Khu vực hiển thị bánh kem */
+.cake-display {
+    position: relative;
+    margin: 0 auto 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.standalone-cake {
+    width: 220px;
+    max-width: 70vw;
+    height: auto;
+    max-height: 260px;
+    object-fit: contain;
+    /* Đổ bóng nhẹ cho bánh tách khỏi nền */
+    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.35));
+    animation: floatCake 3s ease-in-out infinite;
+}
+
+/* Hiệu ứng nhấp nhô bồng bềnh cho bánh kem */
+@keyframes floatCake {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(1deg);
+    }
+}
+
+/* Dòng chúc nhỏ dưới bánh */
+.cake-subtext {
+    color: #ffffff;
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: 25px;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.inline-heart-emoji {
+    width: 1.2em;
+    height: 1.2em;
+    vertical-align: -0.15em;
+    display: inline-block;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (min-width: 768px) {
+    .gift-box {
+        width: 180px;
+        height: 160px;
+    }
+
+    .gift-body {
+        height: 130px;
+    }
+
+    .gift-lid {
+        width: 200px;
+        height: 35px;
+    }
+
+    .birthday-card {
+        padding: 35px 30px;
+    }
+
+    .photo-frame {
+        height: 240px;
+    }
+}

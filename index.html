@@ -1,11 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title id="pageTitle">???</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body>
-    
+
+<body class="dark-mode">
+
+    <div class="balloons-container" id="balloonsContainer"></div>
+
+    <!-- Màn hình 1: Hộp quà -->
+    <div class="gift-section" id="giftSection">
+        <h1 class="instruction-text">Bấm vào để mở nhé</h1>
+        <div class="gift-box" id="giftBox">
+            <div class="gift-lid"></div>
+            <div class="gift-body"></div>
+            <div class="ribbon-vertical"></div>
+            <div class="ribbon-horizontal"></div>
+            <div class="bow"></div>
+        </div>
+    </div>
+
+    <!-- Màn hình 2: Lời chúc & Hình ảnh (Ẩn ban đầu) -->
+    <div class="card-section hidden" id="cardSection">
+        <div class="birthday-card">
+            <h1 class="card-title">🎉 HAPPY BIRTHDAY! 🎂</h1>
+
+            <div class="photo-frame">
+                <!-- Thay link ảnh của bạn vào src bên dưới -->
+                <img src="./assets/img/cat.png" alt="Kỷ niệm sinh nhật" id="memoryPhoto">
+            </div>
+
+            <div class="message-content">
+                <p>✨Chúc bro sinh nhật vui vẻ, tuổi mới nhiều niềm vui, hạnh phúc, tràn đầy năng lượng và đạt được mọi
+                    mục tiêu của bản thân nhé :&#41&#41 ✨</p>
+            </div>
+
+            <button class="replay-btn" id="replayBtn">🎁 Xem tiếp đi</button>
+        </div>
+    </div>
+
+    <!-- Màn hình 3: Màn hình Bánh kem (Ẩn ban đầu) -->
+    <!-- Màn hình 3: Bánh kem giữa màn hình (giống phong cách hộp quà) -->
+    <div class="cake-section hidden" id="cakeSection">
+        <h1 class="cake-main-title">tặng cái bánh <img src="./assets/img/hand-with-index-finger-and-thumb-crossed.png" class="inline-heart-emoji" alt="emoji"></h1>
+
+        <div class="cake-display">
+            <img src="./assets/img/cake.jpg"
+                alt="Birthday Cake" class="standalone-cake" id="cakeImg">
+        </div>
+
+        <p class="cake-subtext">hết ròi nha :&#41&#41</p>
+
+        <button class="replay-btn" id="restartBtn">🎁 Xem lại từ đầu</button>
+    </div>
+
+    <!-- Party Horn -->
+    <audio id="hornAudio" src="assets/audio/partyHorn.mp3" preload="auto"></audio>
+
+    <!-- Happy Birthday song -->
+    <audio id="songAudio" src="assets/audio/birthdaysong-ukelele.mp3" preload="auto" loop></audio>
+
+    <script src="./assets/js/main.js"></script>
 </body>
+
 </html>
